@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/widget/app_background.dart';
 import 'package:weather_app/widget/greeting_message.dart';
 import 'package:weather_app/widget/weather_icon.dart';
+import 'package:weather_app/plugin/position.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +25,16 @@ class HomeScreen extends StatelessWidget {
           statusBarBrightness: Brightness.dark,
         ),
       ),
-      body: _buildBody(context),
+      body: RefreshIndicator(
+          onRefresh: () async {
+            Position position = await determinePosition();
+            context.read<WeatherBloc>().add(FetchWeather(position));
+          },
+          child: ListView(
+            children: [
+              _buildBody(context),
+            ],
+          )),
     );
   }
 
