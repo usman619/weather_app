@@ -21,7 +21,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
             event.position.latitude,
             event.position.longitude,
           );
-          print(weather.toString());
+          // print(weather.toString());
+          // print(weather.weatherIcon);
           emit(WeatherSuccess(weather));
         } on Exception catch (e) {
           emit(WeatherFailure(e));

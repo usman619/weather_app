@@ -6,8 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/plugin/position.dart';
-import 'package:weather_app/screens/home_screen.dart';
-import 'package:weather_app/widget/app_background.dart';
+import 'package:weather_app/screens/home_screen_v2.dart';
+// import 'package:weather_app/widget/app_background.dart';
+//import 'package:weather_app/screens/home_screen.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
                     ..add(
                       FetchWeather(snapshot.data as Position),
                     ),
-                  child: const HomeScreen(),
+                  child: const HomeScreenV2(),
                 );
               } else {
                 return Scaffold(
@@ -48,10 +49,10 @@ class MyApp extends StatelessWidget {
                         40, 1.2 * kToolbarHeight, 40, 20),
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height,
-                      child: Stack(
+                      child: const Stack(
                         children: [
-                          appBackground(),
-                          const Center(
+                          // appBackground(),
+                          Center(
                             child: CupertinoActivityIndicator(
                               color: Colors.white,
                             ),

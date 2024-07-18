@@ -26,15 +26,14 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: RefreshIndicator(
-          onRefresh: () async {
-            Position position = await determinePosition();
-            context.read<WeatherBloc>().add(FetchWeather(position));
-          },
-          child: ListView(
-            children: [
-              _buildBody(context),
-            ],
-          )),
+        onRefresh: () async {
+          Position position = await determinePosition();
+          context.read<WeatherBloc>().add(FetchWeather(position));
+        },
+        child: SingleChildScrollView(
+          child: _buildBody(context),
+        ),
+      ),
     );
   }
 
